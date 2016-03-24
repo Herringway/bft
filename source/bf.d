@@ -1,6 +1,6 @@
 import std.range : isInputRange, isOutputRange;
 ///A brainfuck program
-struct BFProgram(string program, size_t memSize = 0x1000) {
+struct BFProgram(string program, size_t memSize = 9999) {
 	///Just a big ol' block of memory
 	dchar[memSize] memory = void;
 	///Program data pointer
@@ -19,7 +19,7 @@ struct BFProgram(string program, size_t memSize = 0x1000) {
 		auto outp = stdout.lockingTextWriter;
 		execute(inp, outp);
 	}
-	void execute(Input, Output)(ref Input stdin, ref Output stdout) if (isInputRange!Input && isOutputRange!(Output, char)) {
+	void execute(Input, Output)(Input stdin, Output stdout) if (isInputRange!Input && isOutputRange!(Output, char)) {
 		import std.range : put, front, popFront, empty;
 		import std.algorithm : copy;
 		memory[] = '\0';
