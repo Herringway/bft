@@ -1,6 +1,6 @@
 import std.range : isInputRange, isOutputRange;
 ///A brainfuck program
-struct BFProgram(string program, size_t memSize = 9999) {
+struct BFProgram(string program, size_t memSize = 8192) {
 	///Just a big ol' block of memory
 	dchar[memSize] memory = void;
 	///Program data pointer
@@ -86,5 +86,16 @@ unittest {
 		string inbuf = "HELLO";
 		program.execute(inbuf, outbuf);
 		assert(outbuf.data == "URYYB");
+	}
+	{
+		import std.algorithm : splitter, filter;
+		import std.uni : isWhite;
+		import std.array : array;
+		import std.utf : toUTF8;
+		auto program = BFProgram!(import("392quine.b"), 1024)();
+		auto outbuf = appender!(char[])();
+		char[] inbuf;
+		program.execute(inbuf, outbuf);
+		assert(outbuf.data == import("392quine.b").splitter("\x1A").front.filter!(x => !x.isWhite).array.toUTF8~"\x1A");
 	}
 }
