@@ -98,4 +98,14 @@ unittest {
 		program.execute(inbuf, outbuf);
 		assert(outbuf.data == import("392quine.b").splitter("\x1A").front.filter!(x => !x.isWhite).array.toUTF8~"\x1A");
 	}
+	{
+		auto ctfeTest() {
+			auto program = BFProgram!(import("brainfuck-interpreter.b"), 1024)();
+			auto outbuf = appender!(char[])();
+			char[] prog = import("helloworld.b");
+			program.execute(prof, outbuf);
+			return outbuf.data;
+		}
+		pragma(msg, ctfeTest());
+	}
 }
