@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Function transpile</title>
+		<link rel="stylesheet" type="text/css" href="../../styles/ddox.css"/>
+		<link rel="stylesheet" href="../../prettify/prettify.css" type="text/css"/>
+		<script type="text/javascript" src="../../scripts/jquery.js">/**/</script><script type="text/javascript" src="../../scripts/ddox.js">/**/</script>
+	</head>
+	<body onload="setupDdox();">
+		<nav id="main-nav">
+			<noscript>
+				<p style="color: red">The search functionality needs JavaScript enabled</p>
+			</noscript>
+			<div id="symbolSearchPane" style="display: none">
+				<form action="#" method="GET">
+					<input id="symbolSearch" type="text" name="q" placeholder="Search for symbols" autocomplete="off" onchange="performSymbolSearch(40);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
+				</form>
+				<ul id="symbolSearchResults" class="symbolList" style="display: none"></ul><script type="application/javascript" src="../../symbols.js"></script><script type="application/javascript">var symbolSearchRootDir = "../../";
+$('#symbolSearchPane').show();</script>
+			</div>
+			<ul class="tree-view">
+				<li class="tree-view ">
+					<div class="package ">bft
+					</div>
+			<ul class="tree-view">
+				<li>
+					<div class="module selected">
+						<a href="../../bft/bf.html">bf</a>
+					</div>
+				</li>
+			</ul>
+				</li>
+			</ul>
+		</nav>
+		<div id="main-contents">
+			<h1>Function transpile</h1><p>Transpile bf -&gt; D
+</p>
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<span class="typ">string</span> <span class="pln">transpile</span>
+			<span class="pun">(</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">program</span>
+			<br/>
+			<span class="pun">)</span><span class="pln"> </span><span class="kwd">pure @safe</span><span class="pun">;</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h2>Example</h2>
+
+<pre class="code"><code class="lang-d"><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">array </span><span class="pun">: </span><span class="pln">appender</span><span class="pun">;
+{
+	</span><span class="kwd">auto <a href="../../bft/bf/transpile.html#program"></span><span class="pln">program</span></a><span class="pln"> </span><span class="pun">= <a href="../../bft/bf/BFProgram.html"></span><span class="typ">BFProgram</span></a><span class="pun">!(</span><span class="kwd">import</span><span class="pun">(</span><span class="str">"helloworld.b"</span><span class="pun">), </span><span class="lit">7</span><span class="pun">)();
+	</span><span class="kwd">auto </span><span class="pln">outbuf </span><span class="pun">= </span><span class="pln">appender</span><span class="pun">!(</span><span class="typ">char</span><span class="pun">[])();
+	</span><span class="pln">program<wbr/></span><span class="pun">.</span><span class="pln">execute</span><span class="pun">(</span><span class="str">""</span><span class="pun">, </span><span class="pln">outbuf</span><span class="pun">);
+	</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">outbuf<wbr/></span><span class="pun">.</span><span class="pln">data </span><span class="pun">== </span><span class="str">"Hello World!\n"</span><span class="pun">);
+}
+{
+	</span><span class="kwd">auto <a href="../../bft/bf/transpile.html#program"></span><span class="pln">program</span></a><span class="pln"> </span><span class="pun">= <a href="../../bft/bf/BFProgram.html"></span><span class="typ">BFProgram</span></a><span class="pun">!(</span><span class="kwd">import</span><span class="pun">(</span><span class="str">"bench.b"</span><span class="pun">), </span><span class="lit">8</span><span class="pun">)();
+	</span><span class="kwd">auto </span><span class="pln">outbuf </span><span class="pun">= </span><span class="pln">appender</span><span class="pun">!(</span><span class="typ">char</span><span class="pun">[])();
+	</span><span class="pln">program<wbr/></span><span class="pun">.</span><span class="pln">execute</span><span class="pun">(</span><span class="str">""</span><span class="pun">, </span><span class="pln">outbuf</span><span class="pun">);
+	</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">outbuf<wbr/></span><span class="pun">.</span><span class="pln">data </span><span class="pun">== </span><span class="str">"ZYXWVUTSRQPONMLKJIHGFEDCBA\n"</span><span class="pun">);
+}
+{
+	</span><span class="kwd">auto <a href="../../bft/bf/transpile.html#program"></span><span class="pln">program</span></a><span class="pln"> </span><span class="pun">= <a href="../../bft/bf/BFProgram.html"></span><span class="typ">BFProgram</span></a><span class="pun">!(</span><span class="kwd">import</span><span class="pun">(</span><span class="str">"rot13.b"</span><span class="pun">), </span><span class="lit">8</span><span class="pun">)();
+	</span><span class="kwd">auto </span><span class="pln">outbuf </span><span class="pun">= </span><span class="pln">appender</span><span class="pun">!(</span><span class="typ">char</span><span class="pun">[])();
+	</span><span class="typ">string </span><span class="pln">inbuf </span><span class="pun">= </span><span class="str">"HELLO"</span><span class="pun">;
+	</span><span class="pln">program<wbr/></span><span class="pun">.</span><span class="pln">execute</span><span class="pun">(</span><span class="pln">inbuf</span><span class="pun">, </span><span class="pln">outbuf</span><span class="pun">);
+	</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">outbuf<wbr/></span><span class="pun">.</span><span class="pln">data </span><span class="pun">== </span><span class="str">"URYYB"</span><span class="pun">);
+}
+{
+	</span><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">algorithm </span><span class="pun">: </span><span class="pln">splitter</span><span class="pun">, </span><span class="pln">filter</span><span class="pun">;
+	</span><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">uni </span><span class="pun">: </span><span class="pln">isWhite</span><span class="pun">;
+	</span><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">array </span><span class="pun">: </span><span class="pln">array</span><span class="pun">;
+	</span><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">utf </span><span class="pun">: </span><span class="pln">toUTF8</span><span class="pun">;
+	</span><span class="kwd">auto <a href="../../bft/bf/transpile.html#program"></span><span class="pln">program</span></a><span class="pln"> </span><span class="pun">= <a href="../../bft/bf/BFProgram.html"></span><span class="typ">BFProgram</span></a><span class="pun">!(</span><span class="kwd">import</span><span class="pun">(</span><span class="str">"392quine.b"</span><span class="pun">), </span><span class="lit">1024</span><span class="pun">)();
+	</span><span class="kwd">auto </span><span class="pln">outbuf </span><span class="pun">= </span><span class="pln">appender</span><span class="pun">!(</span><span class="typ">char</span><span class="pun">[])();
+	</span><span class="pln">program<wbr/></span><span class="pun">.</span><span class="pln">execute</span><span class="pun">(</span><span class="str">""</span><span class="pun">, </span><span class="pln">outbuf</span><span class="pun">);
+	</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">outbuf<wbr/></span><span class="pun">.</span><span class="pln">data </span><span class="pun">== </span><span class="kwd">import</span><span class="pun">(</span><span class="str">"392quine.b"</span><span class="pun">)<wbr/>.</span><span class="pln">splitter</span><span class="pun">(</span><span class="str">"\x1A"</span><span class="pun">)<wbr/>.</span><span class="pln">front<wbr/></span><span class="pun">.</span><span class="pln">filter</span><span class="pun">!(</span><span class="pln">x </span><span class="pun">=&gt; !</span><span class="pln">x<wbr/></span><span class="pun">.</span><span class="pln">isWhite</span><span class="pun">)<wbr/>.</span><span class="pln">array<wbr/></span><span class="pun">.</span><span class="pln">toUTF8</span><span class="pun">~</span><span class="str">"\x1A"</span><span class="pun">);
+}
+</span></code></pre>
+</section>
+
+			<footer>
+				<table class="license-info">
+					<tr>
+						<th>Authors</th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>Copyright</th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>License</th>
+						<td>
+							
+						</td>
+					</tr>
+				</table>
+				<p class="faint">Generated using the DDOX documentation generator</p>
+			</footer>
+		</div>
+	</body>
+</html>
