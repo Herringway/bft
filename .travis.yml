@@ -16,6 +16,7 @@ install:
 script:
   - dub test -b unittest-cov
   - ./doveralls
+before_deploy: dub build -b ddox
 deploy:
   provider: pages
   skip_cleanup: true
