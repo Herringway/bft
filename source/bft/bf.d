@@ -76,7 +76,7 @@ string transpile(string program) pure @safe {
 	return prog.join("\n");
 }
 ///
-unittest {
+@safe pure unittest {
 	import std.array : appender;
 	{
 		auto program = BFProgram!(import("helloworld.b"), 7)();
