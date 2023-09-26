@@ -5,3 +5,4 @@ __dummy.html
 *.obj
 *.exe
 dub.selections.json
+*.pdb
